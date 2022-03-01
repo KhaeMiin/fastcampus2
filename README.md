@@ -24,6 +24,8 @@
 
 
 **ApplicationContext의 주요 메서드**
+<br>
 GitHub 참고
+<br>
 [Gti: ApplicationContext Method 코드 보기](https://github.com/KhaeMiin/fastcampus2/blob/master/ch3/src/main/java/com/fastcampus/ch3/ApplicationContextTest.java)		
 		
