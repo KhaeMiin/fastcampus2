@@ -5,7 +5,7 @@
  **Spring Bean** 
 - POJO(plain Old java Object): EJB의 반댓말 즉 심플하다., 단순하고 독립적
 - Spring Container가 관리
-
+<br><br>
 **Bean**
 - Spring Container가 관리하는 객체
 	- Spring Container: Bean저장소, Bean을 저장, 관리(생성, 소멸, 연결(@Autowired같은)
@@ -22,7 +22,7 @@
 	|부가설명 |text문서이기 때문에 컴파일러보단 떨어짐 |자바코드가 더 유리(컴파일러 체크)
 
 
-
+<br><br>
 **ApplicationContext의 주요 메서드**
 <br><br>
 GitHub 참고
