@@ -58,8 +58,8 @@ class AppContext {
 public class Main3 {
     public static void main(String[] args) throws Exception {
         AppContext ac = new AppContext();
-        Car car = (Car) ac.getBean("car");//byName으로 객체를 검색!
-        Car car2 = (Car) ac.getBean(Car.class);//byType으로 객체를 검색!
+        Car car = (Car) ac.getBean("car");//byName으로 객체를 검색
+        Car car2 = (Car) ac.getBean(Car.class);//byType으로 객체를 검색
         Engine engine = (Engine) ac.getBean("engine");
         System.out.println("car = " + car);
         System.out.println("engine = " + engine);
