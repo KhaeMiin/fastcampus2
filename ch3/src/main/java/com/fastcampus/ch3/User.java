@@ -8,7 +8,7 @@ public class User {
     private String pwd;
     private String name;
     private String email;
-    private Date brith;
+    private Date birth;
     private String sns;
     private Date reg_date;
 
@@ -17,12 +17,12 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id.equals(user.id) && Objects.equals(pwd, user.pwd) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(brith, user.brith) && Objects.equals(sns, user.sns);
+        return id.equals(user.id) && Objects.equals(pwd, user.pwd) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(birth, user.birth) && Objects.equals(sns, user.sns);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, pwd, name, email, brith, sns);
+        return Objects.hash(id, pwd, name, email, birth, sns);
     }
 
     @Override
@@ -32,7 +32,7 @@ public class User {
                 ", pwd='" + pwd + '\'' +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", brith=" + brith +
+                ", birth=" + birth +
                 ", sns='" + sns + '\'' +
                 ", reg_date=" + reg_date +
                 '}';
@@ -41,12 +41,12 @@ public class User {
     public User() {
     }
 
-    public User(String id, String pwd, String name, String email, Date brith, String sns, Date reg_date) {
+    public User(String id, String pwd, String name, String email, Date birth, String sns, Date reg_date) {
         this.id = id;
         this.pwd = pwd;
         this.name = name;
         this.email = email;
-        this.brith = brith;
+        this.birth = birth;
         this.sns = sns;
         this.reg_date = reg_date;
     }
@@ -83,12 +83,12 @@ public class User {
         this.email = email;
     }
 
-    public Date getBrith() {
-        return brith;
+    public Date getBirth() {
+        return birth;
     }
 
-    public void setBrith(Date brith) {
-        this.brith = brith;
+    public void setBirth(Date birth) {
+        this.birth = birth;
     }
 
     public String getSns() {

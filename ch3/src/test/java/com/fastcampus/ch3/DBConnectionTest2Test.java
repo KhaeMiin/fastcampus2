@@ -81,22 +81,21 @@ public class DBConnectionTest2Test {
     //매개변수로 받은 사용자 정보로 user_info 테이블을 update하는 메서드
     public int updateUser (User user) throws Exception {
 
-        Connection conn = ds.getConnection();//1. 데이터소스로 부터 데이터베이스 연결을 가져온다음
-
         String sql = "update user_info set pwd = ?, name = ?, email = ?, birth=?, sns = ?, reg_date = now() where id = ?";//2. sql문 작성하고
 
+        Connection conn = ds.getConnection();//1. 데이터소스로 부터 데이터베이스 연결을 가져온다음
         PreparedStatement pstmt = conn.prepareStatement(sql);//3. 물음표에 해당하는 값들을 채운다
+
         pstmt.setString(1, user.getPwd());
         pstmt.setString(2, user.getName());
         pstmt.setString(3, user.getEmail());
-        pstmt.setDate(4, new java.sql.Date(user.getBrith().getTime()));
+        pstmt.setDate(4, new java.sql.Date(user.getBirth().getTime()));
         pstmt.setString(5, user.getSns());
         pstmt.setString(6, user.getId());
 
 
         //executeUpdate: insert, delete, update 사용시
-        int rowCnt = pstmt.executeUpdate();
-        return rowCnt;//4. sql 쿼리 실행
+        return pstmt.executeUpdate();//4. sql 쿼리 실행
 
 
     }
@@ -135,7 +134,7 @@ public class DBConnectionTest2Test {
             user.setPwd(rs.getString(2));
             user.setName(rs.getString(3));
             user.setEmail(rs.getString(4));
-            user.setBrith(new Date(rs.getDate(5).getTime()));
+            user.setBirth(new Date(rs.getDate(5).getTime()));
             user.setSns(rs.getString(6));
             user.setReg_date(new Date(rs.getDate(7).getTime()));
 
@@ -174,7 +173,7 @@ public class DBConnectionTest2Test {
         pstmt.setString(2, user.getPwd());
         pstmt.setString(3, user.getName());
         pstmt.setString(4, user.getEmail());
-        pstmt.setDate(5, new java.sql.Date(user.getBrith().getTime()));
+        pstmt.setDate(5, new java.sql.Date(user.getBirth().getTime()));
         pstmt.setString(6, user.getSns());
 
         //executeUpdate: insert, delete, update 사용시
