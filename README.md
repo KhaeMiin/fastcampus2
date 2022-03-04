@@ -102,3 +102,19 @@ Class Car {
 class SuperEngine extends Engine {}
 ```
 - @Controller, @Service, @Repository, @ContollerAdvice의 메타 에노테이션
+
+# TDD(Test Driven Development) 테스트 주도 개발
+▶실행 결과를 눈으로 직접 확인하는게 아니라 JUnit이라는 프레임워크를 이용해서 테스트 자동화> 일괄적으로 한번에 돌려서 성공 실패 확인 가능
+
+# DAO
+### 1. DAO(Data Access Object)란?
+- **데이터(data)에 접근(access)하기 위한 객체(Object)**
+- Database에 저장된 데이터를 **쓰기(Create), 읽기(Read), 변경(Update), 삭제(Delete)을 수행** → **CRUD**
+- **DB테이블당 하나의 DAO를 작성**
+
+### 2. 계층(layer)의 분리
+Controller(Presentation Layer : Data를 보여주는 계층)가 DAO(영속계층 Persistence Layer or Data Access Layer)를 통해서 간접적으로 Database에 접근한다.
+- 중복코드 제거
+- 관심사의 분리(데이터를 보여주는: Controller || 데이터에 접근하는: DAO)
+- 변경이 유리하다.
+- 보통 비즈니스Layer까지 총 Controller - Business Layer - DAO 3계층으로 나뉜다.
