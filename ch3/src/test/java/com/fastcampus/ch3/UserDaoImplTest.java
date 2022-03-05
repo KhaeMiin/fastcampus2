@@ -1,5 +1,6 @@
 package com.fastcampus.ch3;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +19,33 @@ public class UserDaoImplTest {
     @Autowired
     UserDao userDao;
 
-    @Test
-    public void deleteUser() {
+    @Before
+    public void before() throws Exception {//
+        userDao.deleteAll();
     }
 
     @Test
-    public void selectUser() {
+    public void deleteUser() throws Exception {
+
+        int rowCnt = userDao.deleteUser("asdf");
+        assertTrue(rowCnt == 0);
+
+        User user = new User("asdf", "1234", "aaaa", "aaa@aaa.com", new Date(), "fb", new Date());
+        rowCnt = userDao.insertUser(user);
+        assertTrue(rowCnt == 1);
+
+        rowCnt = userDao.deleteUser("asdf");
+        assertTrue(rowCnt == 1);
+    }
+
+    @Test
+    public void selectUser() throws Exception {
+        User user = new User("asdf", "1234", "aaaa", "aaa@aaa.com", new Date(), "fb", new Date());
+        int rowCnt = userDao.insertUser(user);
+        assertTrue(rowCnt == 1);
+
+        User user1 = userDao.selectUser("asdf");
+        assertTrue(user.getId().equals("asdf"));
     }
 
     @Test
@@ -36,7 +58,6 @@ public class UserDaoImplTest {
         cal.clear();
         cal.set(2021,1,1);
 
-        userDao.deleteAll();
         User user = new User("asdf", "1234", "aaaa", "aaa@aaa.com", new Date(cal.getTimeInMillis()), "fb", new Date());
         int rowCnt = userDao.insertUser(user);
         assertTrue(rowCnt == 1);
