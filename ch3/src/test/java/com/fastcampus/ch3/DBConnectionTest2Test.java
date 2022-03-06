@@ -13,6 +13,7 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 
 import static org.junit.Assert.*;
@@ -156,6 +157,45 @@ public class DBConnectionTest2Test {
         //executeUpdate: insert, delete, update 사용시
         pstmt.executeUpdate();//4. sql 쿼리 실행
 
+
+    }
+
+    @Test
+    public void transactionTest() throws Exception {
+
+        Connection conn = null;
+
+        try {
+            deleteAll();
+            conn = ds.getConnection();//1. 데이터소스로 부터 데이터베이스 연결을 가져온다음
+            conn.setAutoCommit(false);//conn.setAutoCommit(true)가 기본상태
+
+
+            String sql = "insert into user_info values (?, ?, ?, ?, ?, ?, now())";//2. sql문 작성하고
+
+            //SQL Injection 공격, 성능향상
+            PreparedStatement pstmt = conn.prepareStatement(sql);//3. 물음표에 해당하는 값들을 채운다
+            pstmt.setString(1,"asdf");//첫번째 물음표에 getId로 채우는것
+            pstmt.setString(2, "1234");
+            pstmt.setString(3, "asd");
+            pstmt.setString(4, "asd@aaa.com");
+            pstmt.setDate(5, new java.sql.Date(new Date().getTime()));
+            pstmt.setString(6, "fb");
+
+            //executeUpdate: insert, delete, update 사용시
+            int rowCnt = pstmt.executeUpdate();//4-1. sql 쿼리 실행
+
+            pstmt.setString(1, "asdf");
+            rowCnt = pstmt.executeUpdate();//4-2. sql 쿼리 실행
+
+            conn.commit();
+
+        } catch (Exception e) {
+            conn.rollback();//예외 발생시 4-1,4-2 둘다 취소
+            e.printStackTrace();
+        } finally {
+
+        }
 
     }
 
