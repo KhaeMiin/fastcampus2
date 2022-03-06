@@ -130,7 +130,7 @@ Controller(Presentation Layer : Data를 보여주는 계층)가 DAO(영속계층
 
 # DataBaes
 
-[##_Image|kage@o7c8E/btrvkGjpgqq/4UZSatQkdVimiSPDOKKCwk/img.png|CDM|1.3|{"originWidth":880,"originHeight":485,"style":"alignCenter"}_##]
+<image src="https://user-images.githubusercontent.com/91078445/156927089-8083e2f1-d73e-488e-9c29-20c1486dc198.JPG">
 
 ## Transaction, Commit
 ### 1. Transaction이란?
