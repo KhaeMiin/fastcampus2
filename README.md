@@ -124,3 +124,38 @@ Controller(Presentation Layer : Data를 보여주는 계층)가 DAO(영속계층
 - 관심사의 분리(데이터를 보여주는: Controller || 데이터에 접근하는: DAO)
 - 변경이 유리하다.
 - 보통 비즈니스Layer까지 총 Controller - Business Layer - DAO 3계층으로 나뉜다.
+
+---
+
+
+# DataBaes
+
+[##_Image|kage@o7c8E/btrvkGjpgqq/4UZSatQkdVimiSPDOKKCwk/img.png|CDM|1.3|{"originWidth":880,"originHeight":485,"style":"alignCenter"}_##]
+
+## Transaction, Commit
+### 1. Transaction이란?
+**더 이상 나눌 수 없는 작업의 단위 (Tx)**
+ -	ex) insert, update, select
+
+계좌 이체의 경우, 출금과 입금이 하나의 Tx로 묶여야 됨.
+'모'아니면 '도', 출금과 입금이 모두 성공하지 않으면 실패.(즉, 하나라도 실패해도 취소)
+### 2. Transaction의 속성 - ACID
+- 원자성(**A**tomicity) - 나눌 수 없는 하나의 작업으로 다뤄져야 한다.
+- 일관성(**C**onsistency) - Tx 수행 전과 후가 일관된 상태를 유지해야 한다. 
+- 고립성(**I**solation) - 각 Tx는 독립적으로 수행되어야 한다.
+- 영속성(**D**urability) - 성공한 Tx의 결과는 유지되어야 한다.
+
+
+### 3. Commit and Rollback
+- 커밋(commit) : 작업 내용을 DB에 **영구적으로 저장**
+- 롤백(rollback) : 최근 변경사항을 취소(**마지막 커밋으로 복귀**)
+
+### 4. 자동 커밋과 수동 커밋
+-  자동 커밋(Auto Commit) : 명령 실행 후, 자동으로 커밋이 수행(**rollback불가**)
+- 수동 커밋 : 명령 실행 후, 명시적으로 commit(영구적 저장) 또는 rollback을 입력
+
+### 5. Tx의 isolation level
+1. READ UNCOMMITED	: 커밋되지 않은 데이터도 읽기 가능
+2. READ COMMITED: 커밋된 데이터만 읽기 가능
+3. REPEATABLE READ: Tx이 시작된 이후 변경은 무시됨 (default)
+4. SERIALIZABLE: 한번에 하나의 Tx만 독립적으로 수행 (제일 강력/ 고립도 최고)
