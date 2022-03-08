@@ -159,3 +159,85 @@ Controller(Presentation Layer : Data를 보여주는 계층)가 DAO(영속계층
 2. READ COMMITED: 커밋된 데이터만 읽기 가능
 3. REPEATABLE READ: Tx이 시작된 이후 변경은 무시됨 (default)
 4. SERIALIZABLE: 한번에 하나의 Tx만 독립적으로 수행 (제일 강력/ 고립도 최고)
+
+
+# AOP 
+### AOP란?
+관점 지향 프로그래밍 | 횡단 관심사 | cross-cutting concerns <br>
+?????이게 무슨 말일까<br>
+- 부가 기능(advice)을 **동적**으로 추가해주는 기술**(동적: 실행중에)**
+- **메서드의 시작 또는 끝에 자동으로 코드(advice)를 추가**(중요!)
+
+### AOP관련 용어
+|용어|----|
+|----|-----|
+|target|advice가 추가될 때 객체|
+|advice|target에 동적으로 추가될 부가 기능(코드)|
+|join point|advice가 추가(join)될 대상(메서드)|
+|pointcut| join point들을 정의한 **패턴**|
+|proxy|target에 advice가 동적으로 추가되어 생성된 객체|
+|weaving|target에 advice를 추가해서 proxy를 생성하는 것|
+※proxy <br>
+advice와 target를 따로 나눠놨다가 실행중에 동적으로 합쳐서 생성된 새로운 객체 <br>
+※weaving(꿰매기) <br>
+실행시 advice와 target을 합치는 것 <br>
+
+### Advice 종류
+Advice의 설정은 xml과 에노테이션, 두 가지 방법으로 가능 <br>
+※설정 <br>
+```
+// pom.xml
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-aop -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-aop</artifactId>
+    <version>${org.springframework-version}</version>
+</dependency>
+
+<!-- AspectJ -->  
+<dependency>  
+ <groupId>org.aspectj</groupId>  
+ <artifactId>aspectjrt</artifactId>  
+ <version>${org.aspectj-version}</version>  
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+<dependency>
+    <groupId>org.aspectj</groupId>
+    <artifactId>aspectjweaver</artifactId>
+    <version>1.9.7</version>
+</dependency>
+
+```
+|종류|에노테이션|설명|
+|---|-----|-----|
+|around advice|@Around|메서드의 시작과 끝 부분에 추가되는 부가 기능(@Before와 @After를 합친 것)|
+|before advice|@Before|메서드의 시작 부분에 추가되는 부가 기능|
+|after advice|@After|메서드의 끝 부분에 추가되는 부가 기능|
+|after returning|@AfterReturning|예외가 발생하지 않았을 때, 실행되는 부가 기능|
+|after throwing|@AfterThrowing|예외가 발생했을 때, 실행되는 부가 기능|
+
+### pointcut expression
+advice가 추가될 메서드를 지정하기 위한 패턴
+	- execution((접근제어자 넣을 수 있음), 반환타입 패키지명.클래스명.메서드명(매개변수 목록))
+```
+public class Logging{
+	@Around("execution(* com.test.package.aop.*.*(...))")
+	public Objcet metoudCallLog(ProceedingJoinPoint pjp) throws Throwable {//pjp: 메서드의 모든 정보
+
+		//----------------@before start------------------
+		long start = System.currentTimeMillis();
+		System.out.println("<<[start] "
+				+ pjp.getSignature().getName() + Arrays.deepToString(pjp.getArgs()));//getName: 메서드이름, pjp.getArgs(): 매개변수
+		//----------------@before end------------------
+
+		Object result = pjp.proceed(); //메서드 호출
+		
+		//----------------@after start------------------
+		System.out.println("result = " + result);
+		System.out.println("[end]>>" + (System.currentTimeMillis() - start) + "ms");
+		//----------------@after end------------------
+		return result; //메서드 호출결과 반환(다음 advice에게 메서드 호출결과를 넘겨줘야함! 단, 단순히 advice가 하나만 적용하는 경우 void로 리턴 안해줘도 됨)
+	}
+}
+```
