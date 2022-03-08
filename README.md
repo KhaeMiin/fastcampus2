@@ -162,13 +162,13 @@ Controller(Presentation Layer : Data를 보여주는 계층)가 DAO(영속계층
 
 
 # AOP 
-### AOP란?
+### 1. AOP란?
 관점 지향 프로그래밍 | 횡단 관심사 | cross-cutting concerns <br>
 ?????이게 무슨 말일까<br>
 - 부가 기능(advice)을 **동적**으로 추가해주는 기술**(동적: 실행중에)**
 - **메서드의 시작 또는 끝에 자동으로 코드(advice)를 추가**(중요!)
 
-### AOP관련 용어
+### 2. AOP관련 용어
 |용어|----|
 |----|-----|
 |target|advice가 추가될 때 객체|
@@ -182,7 +182,7 @@ advice와 target를 따로 나눠놨다가 실행중에 동적으로 합쳐서 �
 ※weaving(꿰매기) <br>
 실행시 advice와 target을 합치는 것 <br>
 
-### Advice 종류
+### 3. Advice 종류
 Advice의 설정은 xml과 에노테이션, 두 가지 방법으로 가능 <br>
 ※설정 <br>
 ```
@@ -217,7 +217,7 @@ Advice의 설정은 xml과 에노테이션, 두 가지 방법으로 가능 <br>
 |after returning|@AfterReturning|예외가 발생하지 않았을 때, 실행되는 부가 기능|
 |after throwing|@AfterThrowing|예외가 발생했을 때, 실행되는 부가 기능|
 
-### pointcut expression
+### 4. pointcut expression
 advice가 추가될 메서드를 지정하기 위한 패턴
 	- execution((접근제어자 넣을 수 있음), 반환타입 패키지명.클래스명.메서드명(매개변수 목록))
 ```
