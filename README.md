@@ -177,6 +177,7 @@ Controller(Presentation Layer : Data를 보여주는 계층)가 DAO(영속계층
 |pointcut| join point들을 정의한 **패턴**|
 |proxy|target에 advice가 동적으로 추가되어 생성된 객체|
 |weaving|target에 advice를 추가해서 proxy를 생성하는 것|
+<br>
 ※proxy <br>
 advice와 target를 따로 나눠놨다가 실행중에 동적으로 합쳐서 생성된 새로운 객체 <br>
 ※weaving(꿰매기) <br>
